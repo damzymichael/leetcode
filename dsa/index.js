@@ -48,5 +48,106 @@ function mergeSortedArrays(array1, array2) {
   return newArray;
 }
 
-console.log(mergeSortedArrays([0, 3, 4, 31], [4, 6, 30, 35, 37]));
+// console.log(mergeSortedArrays([0, 3, 4, 31], [4, 6, 30, 35, 37]));
 // console.log(mergeSortedArrays([2, 3, 4, 9], [1, 5, 8, 11]));
+
+/*
+Given an integer array nums, move all 0's to the end of it while maintaining the relative order of the non-zero elements.
+Note that you must do this in-place without making a copy of the array.
+*/
+let myArray = [0, 1, 0, 2, 3, 4];
+myArray = [0, 0, 1];
+
+var moveZeroes = function (nums) {
+  const zeroIndexes = [];
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i] == 0) {
+      zeroIndexes.push(i);
+      // nums.push(nums.splice(i, 1)[0]);
+    }
+  }
+  // console.log(zeroIndexes);
+  // console.log(nums);
+};
+
+moveZeroes(myArray);
+
+//Under the hood implementation of arrays
+class CustomArray {
+  constructor() {
+    this.length = 0;
+    this.data = {};
+  }
+
+  get(index) {
+    return this.data[index];
+  }
+
+  push(item) {
+    this.data[this.length] = item;
+    this.length++;
+    return this.length;
+  }
+
+  pop() {
+    const lastItem = this.data[this.length - 1];
+    delete this.data[this.length - 1];
+    this.length--;
+    return lastItem;
+  }
+
+  delete(index) {
+    const item = this.data[index];
+    this.shiftItems(index);
+    return item;
+  }
+
+  shiftItems(index) {
+    for (let i = index; i < this.length - 1; i++) {
+      this.data[i] = this.data[i + 1];
+    }
+    delete this.data[this.length - 1];
+    this.length--;
+  }
+}
+
+//Hast table with class
+class HashTable {
+  constructor(size) {
+    this.data = new Array(size);
+  }
+
+  #hash(key) {
+    let hash = 0;
+    for (let i = 0; i < key.length; i++) {
+      hash = (hash + key.charCodeAt(i) * i) % this.data.length;
+    }
+    return hash;
+  }
+
+  //Todo Thow error when you try to add and array is complete
+  set(key, value) {
+    if (this.data[this.data.length - 1]) {
+      throw new Error('Maximum length exceeded');
+    }
+    for (let i = 0; i < this.data.length; i++) {
+      if (!this.data[i]) {
+        this.data.fill([key, value], i, i + 1);
+        break;
+      }
+    }
+  }
+
+  get(key) {
+    for (let i = 0; i < this.data.length; i++) {
+      if (this.data[i] && this.data[i][0] === key) return this.data[i][1];
+    }
+    throw new Error('Key not found');
+  }
+}
+
+const firstHashTable = new HashTable(10);
+
+firstHashTable.set('Mike', 23);
+
+firstHashTable.set('Gray', 20);
