@@ -1,18 +1,15 @@
 /*
- Create a function to merge two sorted arrays and sort the new array
-*/
-
-/*
-TODO STEPS
-// ? Choose the bigger array to loop through
-// ? Create a new empty array
-// * Loop through the bigger array (deal with same size first)
-// ? Grab the current number in both arrays using the current index from the loop
-// * Check if both elements are available in case of one array being bigger than the other(deal with same size first)
-// ? Push the lower number first and push the higher number last
-// ? Check the lower number in the current iteration and compare it with the last number in newArray
-// ? If the lower number is higher than the last number in the new array, replace the last number in the array with the lower number
-// ? Then push the last number in the array and the higher number
+TODO Create a function to merge two sorted arrays and sort the new array
+TODO Steps
+? Choose the bigger array to loop through
+? Create a new empty array
+* Loop through the bigger array (deal with same size first)
+? Grab the current number in both arrays using the current index from the loop
+* Check if both elements are available in case of one array being bigger than the other(deal with same size first)
+? Push the lower number first and push the higher number last
+? Check the lower number in the current iteration and compare it with the last number in newArray
+? If the lower number is higher than the last number in the new array, replace the last number in the array with the lower number
+? Then push the last number in the array and the higher number
 */
 
 function mergeSortedArrays(array1, array2) {
@@ -91,19 +88,22 @@ class CustomArray {
   }
 }
 
-/*
-Given an integer array nums, move all 0's to the end of it while maintaining the relative order of the non-zero elements.
-Note that you must do this in-place without making a copy of the array.
-*/
-
 /* 
+TODO Given an integer array nums, move all 0's to the end of it while maintaining the relative order of the non-zero elements.
+TODO Note that you must do this in-place without making a copy of the array.
 TODO Steps
 ? Iterate through the array with a for loop
 ? Through each iteration, check if the current number is zero
 ? If the current number is zero, remove it from the array using splice
+!Bad because it immediately mutates the array and reduces the amount of iteration
 */
-let myArray = [0, 1, 0, 2, 3, 4];
-// myArray = [0, 0, 1];
+
+/* 
+TODO Steps
+? Duplicate the array and create a currIndex variable(to track back in nums array after modification)  and initialize it at zero
+? Loop through the duplicate and check if each current value is a zero
+? If it's a zero, Splice the nums array using the (index - currIndex) in the loop and increment currIndex by 1
+*/
 
 var moveZeroes = function (nums) {
   const duplicate = [...nums];
@@ -114,11 +114,7 @@ var moveZeroes = function (nums) {
       nums.push(zero);
       currIndex++;
     }
-    console.log('duplicate being used', duplicate);
-
-    console.log('real array being modified', nums);
   }
-  // console.log(nums);
 };
 
 moveZeroes(myArray);
