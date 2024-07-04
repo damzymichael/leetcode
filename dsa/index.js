@@ -111,7 +111,7 @@ class CustomArray {
   }
 }
 
-//Hast table with class
+//Hash table implementation with class
 class HashTable {
   constructor(size) {
     this.data = new Array(size);
@@ -147,16 +147,45 @@ class HashTable {
     }
     return undefined;
   }
+
+  //Todo Create a delete function
+
+  //! O(n**2) In case of collision BAD
+  keys() {
+    const keysArray = [];
+    for (let i = 0; i < this.data.length; i++) {
+      if (this.data[i]) {
+        for (let j = 0; j < this.data[i].length; j++) {
+          keysArray.push(this.data[i][j][0]);
+        }
+      }
+    }
+    return keysArray;
+  }
 }
 
-const firstHashTable = new HashTable(50);
+//* First recurring characters with Map data structure
+// function firstRecurringChar(array) {
+//   const map = new Map();
+//   for (let i = 0; i < array.length; i++) {
+//     if (map.has(array[i])) return map.get(array[i]);
+//     map.set(array[i], array[i]);
+//   }
+//   return undefined;
+// }
 
-firstHashTable.set('Mike', 23);
+//* First recurring characters with Objects
+function firstRecurringChar(array) {
+  const object = new Object();
+  for (let i = 0; i < array.length; i++) {
+    if (object.hasOwnProperty(array[i])) return object[array[i]];
+    object[array[i]] = array[i];
+  }
+  return undefined;
+}
 
-firstHashTable.set('Gray', 20);
+console.log(firstRecurringChar([2, 5, 1, 2, 3, 5, 1, 2, 4]));
 
-firstHashTable.set('Dan', 15);
+console.log(firstRecurringChar([2, 1, 1, 2, 3, 5, 1, 2, 4]));
 
-console.log(firstHashTable.get('Gray'));
-
-console.log(firstHashTable.data);
+console.log(firstRecurringChar([2, 3, 4, 5]));
