@@ -2,16 +2,18 @@
  Create a function to merge two sorted arrays and sort the new array
 */
 
-//Todo STEPS
-//? Choose the bigger array to loop through
-//? Create a new empty array
-//* Loop through the bigger array (deal with same size first)
-//? Grab the current number in both arrays using the current index from the loop
-//* Check if both elements are available in case of one array being bigger than the other(deal with same size first)
-//? Push the lower number first and push the higher number last
-//? Check the lower number in the current iteration and compare it with the last number in newArray
-//? If the lower number is higher than the last number in the new array, replace the last number in the array with the lower number
-//? Then push the last number in the array and the higher number
+/*
+TODO STEPS
+// ? Choose the bigger array to loop through
+// ? Create a new empty array
+// * Loop through the bigger array (deal with same size first)
+// ? Grab the current number in both arrays using the current index from the loop
+// * Check if both elements are available in case of one array being bigger than the other(deal with same size first)
+// ? Push the lower number first and push the higher number last
+// ? Check the lower number in the current iteration and compare it with the last number in newArray
+// ? If the lower number is higher than the last number in the new array, replace the last number in the array with the lower number
+// ? Then push the last number in the array and the higher number
+*/
 
 function mergeSortedArrays(array1, array2) {
   if (array1.length === 0) return array2;
@@ -47,30 +49,8 @@ function mergeSortedArrays(array1, array2) {
   }
   return newArray;
 }
-
 // console.log(mergeSortedArrays([0, 3, 4, 31], [4, 6, 30, 35, 37]));
 // console.log(mergeSortedArrays([2, 3, 4, 9], [1, 5, 8, 11]));
-
-/*
-Given an integer array nums, move all 0's to the end of it while maintaining the relative order of the non-zero elements.
-Note that you must do this in-place without making a copy of the array.
-*/
-let myArray = [0, 1, 0, 2, 3, 4];
-myArray = [0, 0, 1];
-
-var moveZeroes = function (nums) {
-  const zeroIndexes = [];
-  for (let i = 0; i < nums.length; i++) {
-    if (nums[i] == 0) {
-      zeroIndexes.push(i);
-      // nums.push(nums.splice(i, 1)[0]);
-    }
-  }
-  // console.log(zeroIndexes);
-  // console.log(nums);
-};
-
-moveZeroes(myArray);
 
 //Under the hood implementation of arrays
 class CustomArray {
@@ -110,6 +90,38 @@ class CustomArray {
     this.length--;
   }
 }
+
+/*
+Given an integer array nums, move all 0's to the end of it while maintaining the relative order of the non-zero elements.
+Note that you must do this in-place without making a copy of the array.
+*/
+
+/* 
+TODO Steps
+? Iterate through the array with a for loop
+? Through each iteration, check if the current number is zero
+? If the current number is zero, remove it from the array using splice
+*/
+let myArray = [0, 1, 0, 2, 3, 4];
+// myArray = [0, 0, 1];
+
+var moveZeroes = function (nums) {
+  const duplicate = [...nums];
+  let currIndex = 0;
+  for (let i = 0; i < duplicate.length; i++) {
+    if (duplicate[i] === 0) {
+      const zero = nums.splice(i - currIndex, 1)[0];
+      nums.push(zero);
+      currIndex++;
+    }
+    console.log('duplicate being used', duplicate);
+
+    console.log('real array being modified', nums);
+  }
+  // console.log(nums);
+};
+
+moveZeroes(myArray);
 
 //Hash table implementation with class
 class HashTable {
@@ -184,8 +196,14 @@ function firstRecurringChar(array) {
   return undefined;
 }
 
-console.log(firstRecurringChar([2, 5, 1, 2, 3, 5, 1, 2, 4]));
+// console.log(firstRecurringChar([2, 5, 1, 2, 3, 5, 1, 2, 4]));
 
-console.log(firstRecurringChar([2, 1, 1, 2, 3, 5, 1, 2, 4]));
+// console.log(firstRecurringChar([2, 1, 1, 2, 3, 5, 1, 2, 4]));
 
-console.log(firstRecurringChar([2, 3, 4, 5]));
+// console.log(firstRecurringChar([2, 3, 4, 5]));
+
+const nums = [1, 2, 3];
+
+nums.push(...[4, 5, 6]);
+
+// console.log(nums);
