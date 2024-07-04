@@ -125,25 +125,32 @@ class HashTable {
     return hash;
   }
 
-  //Todo Thow error when you try to add and array is complete
+  // set(key, value) {
+  //   if (this.data[this.data.length - 1]) {
+  //     throw new Error('Maximum length exceeded');
+  //   }
+  //   for (let i = 0; i < this.data.length; i++) {
+  //     if (!this.data[i]) {
+  //       this.data.fill([key, value], i, i + 1);
+  //       break;
+  //     }
+  //   }
+  // }
+
+  // get(key) {
+  //   for (let i = 0; i < this.data.length; i++) {
+  //     if (this.data[i] && this.data[i][0] === key) return this.data[i][1];
+  //   }
+  //   throw new Error('Key not found');
+  // }
+
   set(key, value) {
-    if (this.data[this.data.length - 1]) {
-      throw new Error('Maximum length exceeded');
-    }
-    for (let i = 0; i < this.data.length; i++) {
-      if (!this.data[i]) {
-        this.data.fill([key, value], i, i + 1);
-        break;
-      }
-    }
+    const hash = this.#hash(key);
+    if (this.data[hash]) throw Error('Key exists');
+    this.data.fill([key, value], hash, hash + 1);
   }
 
-  get(key) {
-    for (let i = 0; i < this.data.length; i++) {
-      if (this.data[i] && this.data[i][0] === key) return this.data[i][1];
-    }
-    throw new Error('Key not found');
-  }
+  get(key) {}
 }
 
 const firstHashTable = new HashTable(10);
@@ -151,3 +158,5 @@ const firstHashTable = new HashTable(10);
 firstHashTable.set('Mike', 23);
 
 firstHashTable.set('Gray', 20);
+
+console.log(firstHashTable);
