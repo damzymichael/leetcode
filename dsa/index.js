@@ -117,6 +117,7 @@ class HashTable {
     this.data = new Array(size);
   }
 
+  //? O(1)
   #hash(key) {
     let hash = 0;
     for (let i = 0; i < key.length; i++) {
@@ -125,38 +126,37 @@ class HashTable {
     return hash;
   }
 
-  // set(key, value) {
-  //   if (this.data[this.data.length - 1]) {
-  //     throw new Error('Maximum length exceeded');
-  //   }
-  //   for (let i = 0; i < this.data.length; i++) {
-  //     if (!this.data[i]) {
-  //       this.data.fill([key, value], i, i + 1);
-  //       break;
-  //     }
-  //   }
-  // }
-
-  // get(key) {
-  //   for (let i = 0; i < this.data.length; i++) {
-  //     if (this.data[i] && this.data[i][0] === key) return this.data[i][1];
-  //   }
-  //   throw new Error('Key not found');
-  // }
-
+  //? O(1)
   set(key, value) {
-    const hash = this.#hash(key);
-    if (this.data[hash]) throw Error('Key exists');
-    this.data.fill([key, value], hash, hash + 1);
+    const address = this.#hash(key);
+    if (!this.data[address]) {
+      this.data[address] = [];
+    }
+    this.data[address].push([key, value]);
+    return this.data;
   }
 
-  get(key) {}
+  //? 0(1) or O(n) if there's a collision
+  get(key) {
+    let address = this.#hash(key);
+    const currentBucket = this.data[address];
+    if (currentBucket) {
+      for (let i = 0; i < currentBucket.length; i++) {
+        if (currentBucket[i][0] === key) return currentBucket[i][1];
+      }
+    }
+    return undefined;
+  }
 }
 
-const firstHashTable = new HashTable(10);
+const firstHashTable = new HashTable(50);
 
 firstHashTable.set('Mike', 23);
 
 firstHashTable.set('Gray', 20);
 
-console.log(firstHashTable);
+firstHashTable.set('Dan', 15);
+
+console.log(firstHashTable.get('Gray'));
+
+console.log(firstHashTable.data);
