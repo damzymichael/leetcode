@@ -117,7 +117,7 @@ var moveZeroes = function (nums) {
   }
 };
 
-moveZeroes(myArray);
+// moveZeroes(myArray);
 
 //Hash table implementation with class
 class HashTable {
@@ -197,3 +197,67 @@ function firstRecurringChar(array) {
 // console.log(firstRecurringChar([2, 1, 1, 2, 3, 5, 1, 2, 4]));
 
 // console.log(firstRecurringChar([2, 3, 4, 5]));
+
+// 10-->5-->16
+
+const linkedListFormat = {
+  head: {
+    value: 10,
+    next: {
+      value: 5,
+      next: {
+        value: 16,
+        next: null
+      }
+    }
+  }
+};
+
+/* 
+TODO Steps to prepend
+? We grab the value of this.head(cause it's going to be the new next) before changing it 
+? this.head.value would equal the new value passed into the function 
+? this.head.next would be the value of the this.head we saved earlier
+!? Use recursive function to set this.tail NOT NEDED - (We dont need to change the last value)
+? Also increase the length
+*/
+
+class LinkedList {
+  constructor(value) {
+    this.head = {
+      value: value,
+      next: null
+    };
+    this.tail = this.head;
+    this.length = 1;
+  }
+
+  append(value) {
+    //? Recursive function to keep checking if next value exists
+    function pushNextValue(object) {
+      if (object.next) return pushNextValue(object.next);
+
+      object.next = {value, next: null};
+    }
+
+    pushNextValue(this.head);
+
+    this.tail = {value, next: null};
+
+    this.length++;
+  }
+
+  prepend(value) {
+    const currentNext = this.head;
+
+    this.head = {value, next: currentNext};
+
+    this.length++;
+  }
+}
+
+const newLinkedList = new LinkedList(5);
+
+newLinkedList.prepend(10);
+
+newLinkedList.append(16);
