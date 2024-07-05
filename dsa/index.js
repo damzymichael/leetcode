@@ -197,9 +197,3 @@ function firstRecurringChar(array) {
 // console.log(firstRecurringChar([2, 1, 1, 2, 3, 5, 1, 2, 4]));
 
 // console.log(firstRecurringChar([2, 3, 4, 5]));
-
-const nums = [1, 2, 3];
-
-nums.push(...[4, 5, 6]);
-
-// console.log(nums);
