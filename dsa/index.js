@@ -233,16 +233,11 @@ class LinkedList {
   }
 
   append(value) {
-    //? Recursive function to keep checking if next value exists
-    function pushNextValue(object) {
-      if (object.next) return pushNextValue(object.next);
+    const newNode = {value, next: null};
 
-      object.next = {value, next: null};
-    }
+    this.tail.next = newNode;
 
-    pushNextValue(this.head);
-
-    this.tail = {value, next: null};
+    this.tail = newNode;
 
     this.length++;
   }
