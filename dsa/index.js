@@ -240,6 +240,8 @@ class LinkedList {
     this.tail = newNode;
 
     this.length++;
+
+    return this;
   }
 
   prepend(value) {
@@ -248,6 +250,8 @@ class LinkedList {
     this.head = {value, next: currentNext};
 
     this.length++;
+
+    return this;
   }
 }
 
@@ -256,3 +260,14 @@ const newLinkedList = new LinkedList(5);
 newLinkedList.prepend(10);
 
 newLinkedList.append(16);
+
+const multiLineString = `
+   Mike
+   Dan
+   Josh
+`;
+
+for (let i = 0; i < multiLineString.length; i++) {
+  const currentLetter = multiLineString[i];
+  if (/\s/.test(currentLetter)) console.log('whitespace');
+}
