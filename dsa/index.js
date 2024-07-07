@@ -192,11 +192,15 @@ function firstRecurringChar(array) {
   return undefined;
 }
 
-// console.log(firstRecurringChar([2, 5, 1, 2, 3, 5, 1, 2, 4]));
+let arrayToRotate = [1, 2, 3, 4, 5, 6, 7];
 
-// console.log(firstRecurringChar([2, 1, 1, 2, 3, 5, 1, 2, 4]));
+// arrayToRotate = [1, 2];
 
-// console.log(firstRecurringChar([2, 3, 4, 5]));
+function rotateArray(nums, k) {
+  for (let i = 0; i < k; i++) {}
+}
+
+rotateArray(arrayToRotate, 3);
 
 // 10-->5-->16
 
@@ -260,14 +264,3 @@ const newLinkedList = new LinkedList(5);
 newLinkedList.prepend(10);
 
 newLinkedList.append(16);
-
-const multiLineString = `
-   Mike
-   Dan
-   Josh
-`;
-
-for (let i = 0; i < multiLineString.length; i++) {
-  const currentLetter = multiLineString[i];
-  if (/\s/.test(currentLetter)) console.log('whitespace');
-}
